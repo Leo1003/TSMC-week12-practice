@@ -11,24 +11,37 @@ export class Game {
     let frameIndex = 0;
 
     for (let frame = 0; frame < 10; frame++) {
-      if (this.rolls[frameIndex] === 10) {
-        score += 10 + this.rolls[frameIndex + 1] + this.rolls[frameIndex + 2];
+      if (this.isStrike(frameIndex)) {
+        score += 10 + this.strikeBonus(frameIndex);
         frameIndex++;
         continue;
       }
 
       if (this.isSpare(frameIndex)) {
-        score += 10 + this.rolls[frameIndex + 2];
+        score += 10 + this.spareBonus(frameIndex);
       } else {
         score += this.rolls[frameIndex] + this.rolls[frameIndex + 1];
       }
+
       frameIndex += 2;
     }
 
     return score;
   }
 
+  private isStrike(frameIndex: number) {
+    return this.rolls[frameIndex] === 10;
+  }
+
   private isSpare(frameIndex: number) {
     return this.rolls[frameIndex] + this.rolls[frameIndex + 1] === 10;
+  }
+
+  private strikeBonus(frameIndex: number) {
+    return this.rolls[frameIndex + 1] + this.rolls[frameIndex + 2];
+  }
+
+  private spareBonus(frameIndex: number) {
+    return this.rolls[frameIndex + 2];
   }
 }
