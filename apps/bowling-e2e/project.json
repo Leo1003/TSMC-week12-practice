@@ -1,0 +1,28 @@
+{
+  "root": "apps/bowling-e2e",
+  "sourceRoot": "apps/bowling-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/bowling-e2e/cypress.json",
+        "devServerTarget": "bowling:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "bowling:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/bowling-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["bowling"]
+}
