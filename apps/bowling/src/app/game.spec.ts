@@ -1,3 +1,5 @@
+import { isExpressionFactoryMetadata } from '@angular/compiler/src/render3/r3_factory';
+import { TestBed } from '@angular/core/testing';
 import { Game } from './game';
 
 describe('Game', () => {
@@ -40,6 +42,16 @@ describe('Game', () => {
   test('perfect game', () => {
     rollMany(12, 10);
     expect(game.score).toBe(300);
+  });
+
+  test('unfinished game', () => {
+    game.roll(6);
+    game.roll(4);
+    game.roll(9);
+    game.roll(0);
+    game.roll(10);
+    game.roll(7);
+    expect(game.score).toBe(52);
   });
 
   function rollMany(n: number, pins: number) {
