@@ -29,6 +29,14 @@ describe('Game', () => {
     expect(game.score).toBe(16);
   });
 
+  test('test on one strike', () => {
+    game.roll(10); // strike
+    game.roll(3);
+    game.roll(4);
+    rollMany(17, 0);
+    expect(game.score).toBe(24);
+  });
+
   function rollMany(n: number, pins: number) {
     for (let i = 0; i < n; i++) {
       game.roll(pins);
