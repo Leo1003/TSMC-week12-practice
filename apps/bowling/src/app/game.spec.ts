@@ -54,6 +54,16 @@ describe('Game', () => {
     expect(game.score).toBe(52);
   });
 
+  test('invalid values', () => {
+    expect(() => game.roll(-1)).toThrow();
+    expect(() => game.roll(0.5)).toThrow();
+    expect(() => game.roll(-2.8)).toThrow();
+    expect(() => game.roll(11)).toThrow();
+    expect(() => game.roll(10.01)).toThrow();
+    expect(() => game.roll(Infinity)).toThrow();
+    expect(() => game.roll(NaN)).toThrow();
+  })
+
   function rollMany(n: number, pins: number) {
     for (let i = 0; i < n; i++) {
       game.roll(pins);
